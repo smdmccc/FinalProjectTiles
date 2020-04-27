@@ -8,6 +8,8 @@ public class Player
 {
 	private int x;
 	private int y;
+	private int screenX;
+	private int screenY;
 	public Animation playerAnim, movingUp, movingDown, movingLeft, movingRight;
 	public int[] duration = {200, 200, 200, 200};
 	
@@ -16,6 +18,8 @@ public class Player
 		// Start player in middle of first screen
 		x = Game.WIDTH / 2;
 		y = Game.HEIGHT / 2;
+		screenX = Game.WIDTH / 2;
+		screenY = Game.HEIGHT / 2;
 	}
 	
 	public void init() throws SlickException
@@ -118,5 +122,25 @@ public class Player
 	public void setY(int y)
 	{
 		this.y = y;
+	}
+	
+	public int getScreenX()
+	{
+		return this.screenX;
+	}
+	
+	public int getScreenY()
+	{
+		return this.screenY;
+	}
+	
+	public void setScreenX(int x)
+	{
+		this.screenX = x;
+	}
+	
+	public void setScreenY(int y)
+	{
+		this.screenY = y;
 	}
 }
