@@ -87,6 +87,7 @@ public class Player
 		{
 			playerAnim = movingUp;
 			tempY = y - (delta * .2f);
+			hitbox.setY(tempY);
 			playerAnim.start();
 			if ( !checkWorldCollisions(gc, worldCollisions) )
 			{
@@ -103,6 +104,7 @@ public class Player
 		{
 			playerAnim = movingDown;
 			tempY = y + (delta * .2f);
+			hitbox.setY(tempY);
 			playerAnim.start();
 			if ( !checkWorldCollisions(gc, worldCollisions) )
 			{
@@ -117,6 +119,7 @@ public class Player
 		{
 			playerAnim = movingLeft;
 			tempX = x - (delta * .2f);
+			hitbox.setX(tempX);
 			playerAnim.start();
 			if ( !checkWorldCollisions(gc, worldCollisions) )
 			{
@@ -131,6 +134,7 @@ public class Player
 		{
 			playerAnim = movingRight;
 			tempX = x + (delta * .2f);
+			hitbox.setX(tempX);
 			playerAnim.start();
 			if ( !checkWorldCollisions(gc, worldCollisions) )
 			{
