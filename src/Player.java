@@ -12,17 +12,18 @@ public class Player
 	private float tempY;
 	private int width;
 	private int height;
-	private int screenX;
-	private int screenY;
 	public Animation playerAnim, movingUp, movingDown, movingLeft, movingRight;
 	public int[] duration = {200, 200, 200, 200};
 	public Rectangle hitbox;
+	public Rectangle tempHitbox;
 	
 	public Player()
 	{
 		// Start player in middle of first screen
 		x = Game.WIDTH / 2;
 		y = Game.HEIGHT / 2;
+		tempX = x;
+		tempY = y;
 	}
 	
 	public void init() throws SlickException
@@ -63,6 +64,7 @@ public class Player
 		height = 32;
 		
 		hitbox = new Rectangle(x, y, width, height);
+		tempHitbox = new Rectangle(tempX, tempY, width, height);
 		
 		movingUp = new Animation(walkUp, duration, true);
 		movingUp.setLooping(true);
@@ -90,6 +92,11 @@ public class Player
 			{
 				y = (int)tempY;
 			}
+			else
+			{
+				hitbox.setY(y);
+			}
+			
 		}
 		
 		if(Controls.moveDown(gc) )
@@ -101,6 +108,10 @@ public class Player
 			{
 				y = (int)tempY;
 			}
+			else
+			{
+				hitbox.setY(y);
+			}
 		}
 		if(Controls.moveLeft(gc) )
 		{
@@ -110,6 +121,10 @@ public class Player
 			if ( !checkWorldCollisions(gc, worldCollisions) )
 			{
 				x = (int)tempX;
+			}
+			else
+			{
+				hitbox.setX(x);
 			}
 		}
 		if(Controls.moveRight(gc) )
@@ -121,6 +136,10 @@ public class Player
 			{
 				x = (int)tempX;
 			}
+			else
+			{
+				hitbox.setX(x);
+			}
 		}
 		if (Controls.noMovement(gc))
 		{
@@ -128,8 +147,9 @@ public class Player
 		}
 		
 		// Update the location of players hitbox on each frame
-		hitbox.setX(x);
-		hitbox.setY(y);
+		hitbox.setX(tempX);
+		hitbox.setY(tempY);
+		
 		
 	}
 	
