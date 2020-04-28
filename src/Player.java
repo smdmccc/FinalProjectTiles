@@ -8,6 +8,8 @@ public class Player
 {
 	private int x;
 	private int y;
+	private float tempX;
+	private float tempY;
 	private int width;
 	private int height;
 	private int screenX;
@@ -77,31 +79,48 @@ public class Player
 		playerAnim = movingDown;
 	}
 	
-	public void update(int delta, GameContainer gc) throws SlickException
+	public void update(int delta, GameContainer gc, Rectangle[] worldCollisions) throws SlickException
 	{
-		if(Controls.moveUp(gc))
+		if(Controls.moveUp(gc) )
 		{
 			playerAnim = movingUp;
-			y -= (delta * .2f);
+			tempY = y - (delta * .2f);
 			playerAnim.start();
+			if ( !checkWorldCollisions(gc, worldCollisions) )
+			{
+				y = (int)tempY;
+			}
 		}
-		if(Controls.moveDown(gc))
+		
+		if(Controls.moveDown(gc) )
 		{
 			playerAnim = movingDown;
-			y += (delta * .2f);
+			tempY = y + (delta * .2f);
 			playerAnim.start();
+			if ( !checkWorldCollisions(gc, worldCollisions) )
+			{
+				y = (int)tempY;
+			}
 		}
-		if(Controls.moveLeft(gc))
+		if(Controls.moveLeft(gc) )
 		{
 			playerAnim = movingLeft;
-			x -= (delta * .2f);
+			tempX = x - (delta * .2f);
 			playerAnim.start();
+			if ( !checkWorldCollisions(gc, worldCollisions) )
+			{
+				x = (int)tempX;
+			}
 		}
-		if(Controls.moveRight(gc))
+		if(Controls.moveRight(gc) )
 		{
 			playerAnim = movingRight;
-			x += (delta * .2f);
+			tempX = x + (delta * .2f);
 			playerAnim.start();
+			if ( !checkWorldCollisions(gc, worldCollisions) )
+			{
+				x = (int)tempX;
+			}
 		}
 		if (Controls.noMovement(gc))
 		{
@@ -137,5 +156,17 @@ public class Player
 	public Rectangle getBox()
 	{
 		return hitbox;
+	}
+	
+	public boolean checkWorldCollisions(GameContainer gc, Rectangle[] worldCollisions)
+	{
+		for(int i = 0; i < worldCollisions.length; i++)
+		{
+			if (hitbox.intersects(worldCollisions[i]))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

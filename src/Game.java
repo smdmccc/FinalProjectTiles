@@ -49,7 +49,8 @@ public class Game extends StateBasedGame
 		{
 			appgc = new AppGameContainer(new Game(gamename));
 			appgc.setDisplayMode(WIDTH, HEIGHT, false);
-			appgc.setMinimumLogicUpdateInterval(20);
+			appgc.setMinimumLogicUpdateInterval(20);			// Prevents weird issues on fast computers
+			appgc.setTargetFrameRate(60);						// Keeps it from having ridiculously high frame rates and wasting cpu time
 			appgc.start();
 		}
 		catch(SlickException e)
