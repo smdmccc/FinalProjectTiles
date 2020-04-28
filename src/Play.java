@@ -6,23 +6,16 @@ import java.util.*;
 
 public class Play extends BasicGameState
 {
-	
-	//Animation player, movingUp, movingDown, movingLeft, movingRight;
-	Image worldMap;
 	boolean quit = false;
 	
-	//int[] duration = {200, 200, 200, 200};
-	int playerX = Game.WIDTH / 2;
-	int playerY = Game.HEIGHT / 2;
-	int shiftX = playerX - (Game.WIDTH / 2);
-	int shiftY = playerY - (Game.HEIGHT / 2);
+	boolean drawBox = true;		// option to show player hitbox for debugging purposes
 	
+	// Start in upper left screen in 2d screens array
 	int row = 0;
 	int col = 0;
 	
-	Player player = new Player();
+	Player player = new Player();		// Create an instance of Player
 	
-	//ArrayList<TiledMap> screens = new ArrayList<TiledMap>();
 	TiledMap[][] screens = new TiledMap[2][2];
 	TiledMap map;
 	
@@ -32,9 +25,7 @@ public class Play extends BasicGameState
 	}
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
-	{
-		worldMap = new Image("res/map0.png");
-		
+	{	
 		/*screens = new ArrayList<TiledMap>();
 		screens.add(new TiledMap("res/map_02/screen1.tmx"));
 		screens.add(new TiledMap("res/map_02/screen2.tmx"));
@@ -48,7 +39,7 @@ public class Play extends BasicGameState
 		
 		map = screens[row][col];
 
-		player.init();
+		player.init();		// run init method for player
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException
@@ -56,6 +47,10 @@ public class Play extends BasicGameState
 		map.render(0, 0);
 		player.playerAnim.draw(player.getX(), player.getY());
 		g.drawString("Player X: " + player.getX() + "\nPlayer Y: " + player.getY(), 100, 50);
+		if (drawBox)
+		{
+			g.draw(player.getBox() );
+		}
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException

@@ -8,18 +8,19 @@ public class Player
 {
 	private int x;
 	private int y;
+	private int width;
+	private int height;
 	private int screenX;
 	private int screenY;
 	public Animation playerAnim, movingUp, movingDown, movingLeft, movingRight;
 	public int[] duration = {200, 200, 200, 200};
+	public Rectangle hitbox;
 	
 	public Player()
 	{
 		// Start player in middle of first screen
 		x = Game.WIDTH / 2;
 		y = Game.HEIGHT / 2;
-		screenX = Game.WIDTH / 2;
-		screenY = Game.HEIGHT / 2;
 	}
 	
 	public void init() throws SlickException
@@ -55,6 +56,11 @@ public class Player
 				new Image("res/character_walking/right_3.png"),
 				new Image("res/character_walking/right_4.png")
 			};
+		
+		width = 16;
+		height = 32;
+		
+		hitbox = new Rectangle(x, y, width, height);
 		
 		movingUp = new Animation(walkUp, duration, true);
 		movingUp.setLooping(true);
@@ -102,6 +108,10 @@ public class Player
 			playerAnim.stop();
 		}
 		
+		// Update the location of players hitbox on each frame
+		hitbox.setX(x);
+		hitbox.setY(y);
+		
 	}
 	
 	public int getX()
@@ -124,23 +134,8 @@ public class Player
 		this.y = y;
 	}
 	
-	public int getScreenX()
+	public Rectangle getBox()
 	{
-		return this.screenX;
-	}
-	
-	public int getScreenY()
-	{
-		return this.screenY;
-	}
-	
-	public void setScreenX(int x)
-	{
-		this.screenX = x;
-	}
-	
-	public void setScreenY(int y)
-	{
-		this.screenY = y;
+		return hitbox;
 	}
 }

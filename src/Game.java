@@ -49,6 +49,7 @@ public class Game extends StateBasedGame
 		{
 			appgc = new AppGameContainer(new Game(gamename));
 			appgc.setDisplayMode(WIDTH, HEIGHT, false);
+			appgc.setMinimumLogicUpdateInterval(20);
 			appgc.start();
 		}
 		catch(SlickException e)
